@@ -1,0 +1,9 @@
+<h1>My Galleries</h1>
+
+<nav>
+<%= link_to "New Gallery", "/galleries/new" %>
+</nav>
+
+<% @galleries.each do |gallery| %> 
+  <%= link_to gallery.name, "/galleries/#{gallery.id}" %>
+<% end %> 
