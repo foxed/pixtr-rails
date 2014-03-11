@@ -5,5 +5,5 @@
 </nav>
 
 <% @galleries.each do |gallery| %> 
-  <%= link_to gallery.name, "/galleries/#{gallery.id}" %>
+  <%= link_to gallery.name, gallery_path(gallery.id) %>
 <% end %> 
