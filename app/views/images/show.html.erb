@@ -1,6 +1,7 @@
-<h3><%= "#{@image.name}: #{@image.description}" %></h3>
+<h3><%= @image.name %></h3>
+<h3><%= @image.description %></h3>
 
-<div><img src='<%= @image.url %>'></div>
+<div><img src='<%= @image.url %>'</div>
 <p>
 <div>
 <%= link_to "Edit Image", edit_image_path(@image) %>, 

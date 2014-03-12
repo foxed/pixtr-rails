@@ -5,5 +5,5 @@ Pixtr::Application.routes.draw do
   resources :galleries do 
     resources :images, shallow: true
   end
-
+  
 end
