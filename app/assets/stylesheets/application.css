@@ -11,3 +11,10 @@
  *= require_self
  *= require_tree .
  */
+
+h1, h2 { font-family: 'Ewert', cursive;
+}
+
+b, p, a {
+    font-family: 'Droid Sans Mono', sans-serif;
+}

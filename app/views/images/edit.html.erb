@@ -1,0 +1,8 @@
+<h1>Edit Image</h1>
+
+<%= form_for(@image) do |form| %>
+  <div><%= form.text_field :name %> Name </div>
+  <div><%= form.text_field :description %> Description</div>
+  <div><%= form.text_field :url %> URL</div>
+  <%= form.submit "Update Image" %>
+<% end %>
