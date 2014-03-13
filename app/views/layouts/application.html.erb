@@ -11,7 +11,18 @@
 </head>
 <body>
 
+<% if signed_in? %>
+  <div>Welcome, <%= current_user.username %></div>
+  <div><%= link_to "Log out", session_path, method: :delete %></div>
+<% else %>
+
+<div><%= link_to "Sign Up", new_user_path %> or <%= link_to "Sign In", new_session_path %></div>
+
+<% end %>
+
 <%= yield %>
+
+
 
 </body>
 </html>
