@@ -12,9 +12,12 @@
 <body>
   <% if signed_in? %>
       Signed in as: <%= current_user.email %>
-      <%= link_to 'Sign out', sign_out_path, :method => :delete %>
+      <div align ="right">
+        <%= link_to 'Sign out', sign_out_path, :method => :delete %>
+      </div>
     <% else %>
       <%= link_to 'Sign in', sign_in_path %>
+      <%= link_to 'Sign up', sign_up_path %>
     <% end %>
 
     <div id="flash">

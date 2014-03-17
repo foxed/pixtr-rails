@@ -1,14 +1,17 @@
 <h1><%= @gallery.name %></h1>
 
+<% if current_user == @gallery.user %> 
+  
 <div><%= link_to "Edit Gallery", edit_gallery_path(@gallery) %></div>
 <div><%= link_to "Add New Image", new_gallery_image_path(@gallery) %></div>
 <div><%= link_to "Delete Gallery", @gallery, method: :delete %> </div>
 
+<% end %>
 <% @gallery.images.each do |image| %>
  <p><%= "#{image.name}: #{image.description}" %></p>
  <%= link_to image do %>
   <img src='<%= image.url %>'>
- <% end %>
+<% end %>
 <% end %>
 
 
