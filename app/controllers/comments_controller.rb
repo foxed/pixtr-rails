@@ -6,8 +6,12 @@ class CommentsController < ApplicationController
 
   def create
     image = Image.find(params[:image_id])
-    image.comments.create(comment_params)
-    redirect_to image
+    comment = image.comments.new(comment_params)
+    if comment.save
+      redirect_to image, notice: "Comment posted successfully!"
+    else
+      redirect_to image, alert: "You must input text into the comment field."
+    end
   end
 
   def show
@@ -22,3 +26,5 @@ class CommentsController < ApplicationController
  end
 
 end
+# merge is doing this, it is merging hashes 
+#{ "body" = > "fodf", "user_id" => "3" }

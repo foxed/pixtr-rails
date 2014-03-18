@@ -1,6 +1,9 @@
 <h1>New Gallery</h1>
 
 <%= form_for(@gallery) do |form| %>
+  <%= render "form_errors", target: @gallery %>
+
   <%= form.text_field :name %> 
   <%= form.submit "Create Gallery" %>
+
 <% end %>
