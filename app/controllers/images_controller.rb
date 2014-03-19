@@ -23,6 +23,7 @@ class ImagesController < ApplicationController
 
   def edit 
     @image = current_user.images.find(params[:id])
+    @groups = current_user.groups
   end
 
   def update
@@ -30,6 +31,7 @@ class ImagesController < ApplicationController
     if @image.update(image_params)
       redirect_to @image
     else
+      @groups = current_user.groups
       render :edit
     end
   end
@@ -43,6 +45,6 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:image).permit(:name, :description, :url)
+    params.require(:image).permit(:name, :description, :url, group_ids: [])
   end
 end

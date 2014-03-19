@@ -10,9 +10,17 @@
 
 </head>
 <body>
+  <h3><%= link_to "Pixtr", root_path %></h3>
   <% if signed_in? %>
-      Signed in as: <%= current_user.email %>
-      <div align ="right">
+  <nav>
+    <ul>
+      <li> <%= link_to "My Galleries", galleries_path %> </li>
+      <li> <%= link_to "My Groups", groups_path %></li>
+    </ul>
+  </nav>
+
+   Signed in as: <%= current_user.email %>
+     <div align ="right">
         <%= link_to 'Sign out', sign_out_path, :method => :delete %>
       </div>
     <% else %>
