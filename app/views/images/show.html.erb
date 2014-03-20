@@ -1,8 +1,9 @@
-<h3><%= @image.name %></h3>
-<h3><%= @image.description %></h3>
-
-<div><%= image_tag(@image.url, width: 200) %></div>
+<p><%= @image.name %>
+<div><%= image_tag(@image.url, width: 300) %></div>
 <p>
+<p><%= @image.description %>
+<p>uploaded by: <%= link_to @image.user.email, @image.user %> at <%= @image.created_at.strftime("%B %d, %Y") %> 
+
 
 <% if @image.user == current_user %>
   <div>
