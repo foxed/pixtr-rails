@@ -6,7 +6,12 @@ Pixtr::Application.routes.draw do
     resources :images, only: [:new, :create] 
   end
 
-  resources :groups, only: [:index, :create, :new, :show]
+  resources :groups, only: [:index, :create, :new, :show] do
+    member do 
+      post "join" => "group_memberships#create"
+      delete "leave" => "group_memberships#destroy"
+    end
+ end
 
   resources :users, only: [:index, :show] do
     member do 
@@ -16,6 +21,11 @@ Pixtr::Application.routes.draw do
   end
 
   resources :images, except: [:index, :new, :create] do 
+    member do
+      post "vote" => "votes#create"
+      delete "unvote" => "votes#destroy"
+    end
+
     resources :comments, only: [:create]
   end
 end

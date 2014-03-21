@@ -1,4 +1,4 @@
-<div>
-  <%= comment.body %> by <%= comment.user.email %>
+<div style="line-height: 40px">
+  "<%= comment.body %>" by <%= comment.user.email %>
   <%= time_ago_in_words(comment.created_at) %> ago
 </div>

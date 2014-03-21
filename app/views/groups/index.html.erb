@@ -3,8 +3,9 @@
 </div>
 <p>
 <div>
+
+My Groups: <p>
 <% @groups.each do |group| %>
-  My Groups: <p>
   <ul> <%= link_to group.name, group %> </ul>
 <% end %>
 </div>

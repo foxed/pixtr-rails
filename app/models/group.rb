@@ -6,4 +6,10 @@ class Group < ActiveRecord::Base
   has_many :images, through: :group_images
 
   validates :name, presence: true
+
+  private
+
+  def add_member(member)
+    members << member
+  end
 end

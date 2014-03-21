@@ -1,10 +1,26 @@
-<p><%= @image.name %>
-<div><%= image_tag(@image.url, width: 300) %></div>
+<h3> <%= @image.name %> </h3>
+<div>
+  <%= image_tag(@image.url, width: 300) %>
+</div>
+<div>
+  <%= @image.description %>
+</div>
 <p>
-<p><%= @image.description %>
-<p>uploaded by: <%= link_to @image.user.email, @image.user %> at <%= @image.created_at.strftime("%B %d, %Y") %> 
-
-
+<div>
+  <% if signed_in? %>
+    <% if current_user.voted? @image %> 
+      <%= button_to "Unlike", unvote_image_path(@image), method: :delete %>
+    <% else %>
+      <%= button_to "Like", vote_image_path(@image) %>
+    <% end %>
+  <% end %>
+</div>
+<p>
+<div>
+  Total Likes: <%= @image.votes.count %> <br>
+  uploaded by: <%= link_to @image.user.email, @image.user %> at <%= @image.created_at.strftime("%B %d, %Y") %> 
+</div>
+<p>
 <% if @image.user == current_user %>
   <div>
     <%= link_to "Edit Image", edit_image_path(@image) %>, 
@@ -13,14 +29,14 @@
 <% end %>
 
 <div>
-<% if signed_in? %>
-  <%= form_for([@image, @comment]) do |form| %>
-    <%= form.text_area :body %>
-    <%= form.submit "Comment" %>
-  <% end %>
-<% else %>
+  <% if signed_in? %>
+    <%= form_for([@image, @comment]) do |form| %>
+      <%= form.text_area :body %>
+      <%= form.submit "Comment" %>
+    <% end %>
+  <% else %>
     <%= link_to "Sign in", sign_in_path %> to comment
-<% end %>
+  <% end %>
     <%= render @comments %>
     <%= paginate @comments %>
 </div>

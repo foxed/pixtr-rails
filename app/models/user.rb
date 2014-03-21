@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 
   has_many :galleries
   has_many :images, through: :galleries
+  
+  has_many :votes
+  has_many :voted_images, through: :votes, source: :image
 
   has_many :group_memberships, foreign_key: :member_id
   has_many :groups, through: :group_memberships
@@ -31,5 +34,29 @@ class User < ActiveRecord::Base
 
   def following?(other_user)
     followed_user_ids.include? other_user.id
+  end
+
+  def join(group)
+    groups << group 
+  end
+
+  def joined?(group)
+    group_ids.include? group.id
+  end
+
+  def leave(group)
+    groups.destroy(group)
+  end
+
+  def vote(image)
+    voted_images << image
+  end
+
+  def unvote(image)
+    voted_images.destroy(image)
+  end
+
+  def voted?(image)
+    voted_image_ids.include? image.id
   end
 end
