@@ -15,6 +15,11 @@ class User < ActiveRecord::Base
     source: :votable,
     source_type: 'Gallery'
 
+  has_many :group_images,
+    through: :votes,
+    source: :votable,
+    source_type: 'Group'
+
   has_many :group_memberships, foreign_key: :member_id, dependent: :destroy
   has_many :groups, through: :group_memberships
 

@@ -17,6 +17,10 @@ Pixtr::Application.routes.draw do
       post "join" => "group_memberships#create"
       delete "leave" => "group_memberships#destroy"
     end
+    member do
+      post "vote" => "group_votes#create"
+      delete "unvote" => "group_votes#destroy"
+    end
  end
 
   resources :users, only: [:index, :show] do
