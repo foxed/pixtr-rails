@@ -1,0 +1,3 @@
+class GalleryVote < Vote
+
+end

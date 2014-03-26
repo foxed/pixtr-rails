@@ -1,0 +1,5 @@
+<div>
+  <%= vote_activity.email %> liked 
+  <%= link_to vote_activity.votable_name, vote_activity.votable %>
+  <%= time_ago_in_words(vote_activity.created_at) %> ago
+</div>

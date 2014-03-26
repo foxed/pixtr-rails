@@ -1,4 +1,19 @@
 <h1><%= @gallery.name %></h1>
+<div>
+  <% if signed_in? %>
+    <% if current_user.voted? @gallery %>
+      <%= button_to "Downvote", unvote_gallery_path(@gallery), method: :delete %>
+        <% else %>
+      <%= button_to "Upvote", vote_gallery_path(@gallery) %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= pluralize(@gallery.votes.count, "upvotes") %> <br>
+</div>
+<p>
+
+<p>
 
 <% if current_user == @gallery.user %> 
 

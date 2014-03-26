@@ -1,7 +1,8 @@
 class Vote < ActiveRecord::Base
   belongs_to :user
-  belongs_to :image
+  belongs_to :votable, polymorphic: true
 
-  validates :image_id,
-    uniqueness: { scope: :user_id }
+  has_many :activities, as: :subject, dependent: :destroy
+
+  validates :votable, presence: true
 end

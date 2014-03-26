@@ -1,13 +1,13 @@
 <!DOCTYPE html>
+
 <html>
 <head>
   <title>Pixtr</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
-  <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono|Sigmar+One|Ewert|Cinzel' rel='stylesheet' type='text/css'>
-
-
+</head>
+<body>
   <h3><%= link_to "Pixtr", root_path %></h3>
   <% if signed_in? %>
     <nav>
@@ -16,15 +16,13 @@
     </nav>
    <div align ="right">
      Signed in as: <%= current_user.email %>
-     <%= link_to 'Sign out', sign_out_path, :method => :delete %>
+   <%= link_to 'Sign out', sign_out_path, method: :delete %>
    </div>
   <% else %>
     <%= link_to 'Sign in', sign_in_path %>
     <%= link_to 'Sign up', sign_up_path %>
   <% end %>
-</head>
 
-<body>
     <div id="flash">
       <% flash.each do |key, value| %>
         <div class="flash <%= key %>"><%= value %></div>

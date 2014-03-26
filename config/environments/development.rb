@@ -1,5 +1,5 @@
 Pixtr::Application.configure do
-  
+  config.sass 
   config.cache_classes = false
 
   config.eager_load = false

@@ -9,15 +9,15 @@
 <div>
   <% if signed_in? %>
     <% if current_user.voted? @image %> 
-      <%= button_to "Unlike", unvote_image_path(@image), method: :delete %>
+      <%= button_to "Downvote", unvote_image_path(@image), method: :delete %>
     <% else %>
-      <%= button_to "Like", vote_image_path(@image) %>
+      <%= button_to "Upvote", vote_image_path(@image) %>
     <% end %>
   <% end %>
 </div>
 <p>
 <div>
-  Total Likes: <%= @image.votes.count %> <br>
+  <%= pluralize(@image.votes.count, "upvotes") %> <br>
   uploaded by: <%= link_to @image.user.email, @image.user %> at <%= @image.created_at.strftime("%B %d, %Y") %> 
 </div>
 <p>

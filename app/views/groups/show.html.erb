@@ -1,11 +1,12 @@
 <h3><%= @group.name %></h3>
 <h3><%= @group.description %></h3>
-
-<% if current_user.joined?(@group) %>
-  <%= button_to "Leave Group", leave_group_path(@group), method: :delete %>
-  Welcome back!
-<% else %>
-  <%= button_to "Join Group", join_group_path(@group) %>
+<% if signed_in? %>
+  <% if current_user.joined?(@group) %>
+    <%= button_to "Leave Group", leave_group_path(@group), method: :delete %>
+      Welcome back!
+  <% else %>
+    <%= button_to "Join Group", join_group_path(@group) %>
+  <% end %>
 <% end %>
-  <%= render @images %>
+<%= render @images %>
 

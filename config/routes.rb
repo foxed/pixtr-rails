@@ -1,9 +1,15 @@
 Pixtr::Application.routes.draw do
 
   root "homes#show"
+  resource :dashboard, only: [:show]
 
   resources :galleries do 
-    resources :images, only: [:new, :create] 
+      member do
+        post "vote" => "gallery_votes#create"
+        delete "unvote" => "gallery_votes#destroy"
+      end
+
+      resources :images, only: [:new, :create] 
   end
 
   resources :groups, only: [:index, :create, :new, :show] do
@@ -22,8 +28,8 @@ Pixtr::Application.routes.draw do
 
   resources :images, except: [:index, :new, :create] do 
     member do
-      post "vote" => "votes#create"
-      delete "unvote" => "votes#destroy"
+      post "vote" => "image_votes#create"
+      delete "unvote" => "image_votes#destroy"
     end
 
     resources :comments, only: [:create]

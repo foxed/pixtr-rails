@@ -1,0 +1,23 @@
+/*
+Errno::ENOTDIR: Not a directory @ rb_sysopen - stylesheets/sass
+
+Backtrace:
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:405:in `read'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:405:in `update_stylesheet'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:189:in `block in update_stylesheets'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:186:in `each'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:186:in `update_stylesheets'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:221:in `watch'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/plugin.rb:108:in `method_missing'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/exec.rb:509:in `watch_or_update'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/exec.rb:346:in `process_result'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/exec.rb:43:in `parse'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/lib/sass/exec.rb:22:in `parse!'
+/Users/AlexFox/.gem/ruby/2.1.0/gems/sass-3.3.4/bin/sass:13:in `<top (required)>'
+/Users/AlexFox/.gem/ruby/2.1.0/bin/sass:23:in `load'
+/Users/AlexFox/.gem/ruby/2.1.0/bin/sass:23:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Errno::ENOTDIR: Not a directory @ rb_sysopen - stylesheets/sass"; }

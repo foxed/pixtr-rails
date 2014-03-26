@@ -8,6 +8,12 @@ class CommentsController < ApplicationController
     image = Image.find(params[:image_id])
     comment = image.comments.new(comment_params)
     if comment.save
+      current_user.followers.each do |follower|
+        follower.activities.create(
+          subject: comment,
+          type: 'CommentActivity'
+        )
+      end
       redirect_to image, notice: "Comment posted successfully!"
     else
       redirect_to image, alert: "You must input text into the comment field."
