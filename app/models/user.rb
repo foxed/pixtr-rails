@@ -42,18 +42,23 @@ class User < ActiveRecord::Base
   has_many :followers,
     through: :follower_relationships
 
-  def notify_followers(subject, type)
-    followers.each do |follower|
-      follower.activities.create(
-        subject: subject,
-        type: type
-      )
+  def notify_followers(subject, target, type)
+    if subject.persisted? 
+      followers.each do |follower|
+        follower.activities.create(
+          subject: subject,
+          type: type,
+          actor: self,
+          target: target
+        )
+      #  UserMailer.notify_on_new_activity(follower, subject).deliver
+     end
     end
   end
 
   def follow(other_user)
     follow = followed_user_relationships.create(followed_user: other_user)
-    notify_followers(follow, 'FollowActivity')
+    notify_followers(follow, other_user, 'FollowActivity')
   end
 
   def unfollow(other_user)
@@ -66,9 +71,7 @@ class User < ActiveRecord::Base
 
   def join(group)
     group_membership = group_memberships.create(group: group)
-
-    notify_followers(group_membership, 'GroupMembershipActivity')
-
+    notify_followers(group_membership, group, 'GroupMembershipActivity')
   end
 
   def joined?(group)
@@ -81,7 +84,7 @@ class User < ActiveRecord::Base
 
   def vote(target)
    vote = votes.create(votable: target)
-   notify_followers(vote, 'VoteActivity')
+    notify_followers(vote, target, 'VoteActivity')
   end
 
   def unvote(target)

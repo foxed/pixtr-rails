@@ -3,6 +3,8 @@ class Image < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :votes, as: :votable, dependent: :destroy
 
+  has_many :activities
+
   has_many :group_images, dependent: :destroy
   has_many :groups, through: :group_images
 

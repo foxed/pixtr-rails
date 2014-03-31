@@ -1,4 +1,10 @@
 <div style="line-height: 40px">
+<%= div_for comment do %>
   "<%= comment.body %>" by <%= comment.user.email %>
-  <%= time_ago_in_words(comment.created_at) %> ago
+    <%= time_ago_in_words(comment.created_at) %> ago
+  <% if current_user && current_user == comment.actor %>
+    <%= button_to "Delete", comment, method: :delete, remote: true %>
+  <% end %>
+<% end %>
+</div>
 </div>

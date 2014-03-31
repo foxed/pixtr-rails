@@ -1,0 +1,9 @@
+<% if current_user.voted? @image %> 
+  <div id="image_vote_button">
+    <%= button_to "Downvote", unvote_image_path(@image), method: :delete, remote: true %>
+  </div>
+<% else %>
+  <div id="image_vote_button">
+    <%= button_to "Upvote", vote_image_path(@image), remote: true %>
+  </div>
+<% end %>

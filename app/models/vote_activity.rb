@@ -1,13 +1,13 @@
 class VoteActivity < Activity
   def votable
-    subject.votable
+    target
   end
 
   def votable_name
-    votable.name
+    target.name
   end
 
   def email
-    subject.user.email
+    actor.email
   end
 end

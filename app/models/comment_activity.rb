@@ -1,17 +1,17 @@
 class CommentActivity < Activity
-  def comment
-    subject.body
-  end 
-
-  def image
-    subject.image
-  end
-
-  def image_name
-    subject.image.name
-  end
-
-  def user
-    subject.user.email
-  end
-end
+#   def comment
+#     target.body
+#   end 
+#
+#   def image
+#     target
+#   end
+#
+#   def image_name
+#     target.name
+#   end
+#
+#   def email
+#     actor.email
+#   end
+ end

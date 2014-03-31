@@ -35,7 +35,7 @@ Pixtr::Application.routes.draw do
       post "vote" => "image_votes#create"
       delete "unvote" => "image_votes#destroy"
     end
-
     resources :comments, only: [:create]
-  end
+   end
+    resources :comments, only: [:destroy]
 end

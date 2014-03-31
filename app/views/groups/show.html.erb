@@ -1,22 +1,17 @@
 <h3><%= @group.name %></h3>
 <h3><%= @group.description %></h3>
 <% if signed_in? %>
-  <% if current_user.joined? @group %>
-    <p>
-    <% if current_user.voted? @group %>
-      <%= button_to "Downvote", unvote_group_path(@group), method: :delete %>
-    <% else %>
-      <%= button_to "Upvote", vote_group_path(@group) %>
-    <% end %>
-  <div>
-    <%= pluralize(@group.votes.count, "upvotes") %> <br>
-  </div>
-
-    <%= button_to "Leave Group", leave_group_path(@group), method: :delete %>
-       Welcome back!
+  <% if current_user.voted? @group %>
+    <%= button_to "Downvote", unvote_group_path(@group), method: :delete %>
   <% else %>
-    <%= button_to "Join Group", join_group_path(@group) %>
+    <%= button_to "Upvote", vote_group_path(@group) %>
   <% end %>
+<div>
+  <%= pluralize(@group.votes.count, "upvotes") %> <br>
+</div>
+<div id="join_group_button">
+  <%= render "join_group_button", group: @group %>
+</div>
 <% end %>
 <%= render @images %>
 

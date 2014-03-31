@@ -5,22 +5,16 @@
 <div>
   <%= @image.description %>
 </div>
-<p>
-<div>
-  <% if signed_in? %>
-    <% if current_user.voted? @image %> 
-      <%= button_to "Downvote", unvote_image_path(@image), method: :delete %>
-    <% else %>
-      <%= button_to "Upvote", vote_image_path(@image) %>
-    <% end %>
-  <% end %>
-</div>
-<p>
+<% if signed_in? %>
+  <div id="image_vote_button">
+    <%= render "image_vote_button", image: @image %>
+  </div>
+<% end %>
 <div>
   <%= pluralize(@image.votes.count, "upvotes") %> <br>
   uploaded by: <%= link_to @image.user.email, @image.user %> at <%= @image.created_at.strftime("%B %d, %Y") %> 
 </div>
-<p>
+
 <% if @image.user == current_user %>
   <div>
     <%= link_to "Edit Image", edit_image_path(@image) %>, 
@@ -30,13 +24,15 @@
 
 <div>
   <% if signed_in? %>
-    <%= form_for([@image, @comment]) do |form| %>
+    <%= form_for([@image, @comment], remote: true) do |form| %>
       <%= form.text_area :body %>
       <%= form.submit "Comment" %>
     <% end %>
   <% else %>
     <%= link_to "Sign in", sign_in_path %> to comment
   <% end %>
+  <div id="comments">
     <%= render @comments %>
+  </div>
     <%= paginate @comments %>
 </div>

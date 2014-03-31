@@ -4,10 +4,10 @@ class GroupsController < ApplicationController
   def index
     @groups = current_user.groups
   end
-  
+
   def show
     @group = Group.find(params[:id])
-    @images = @group.images
+    @images = @group.images.includes(group: [:user])
   end
 
   def new

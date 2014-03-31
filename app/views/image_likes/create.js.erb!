@@ -1,0 +1,2 @@
+template = "<%= j button_to "Downvote Image", unvote_image_path(@image), remote: true, method: :delete %>";
+$("#vote_button").replaceWith(template);
