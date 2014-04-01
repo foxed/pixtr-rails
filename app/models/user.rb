@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   handle_asynchronously :notify_followers
 
   def mail(follower, subject)
-    UserMailer.delay.notify_on_new_activity(follower, subject)
+    UserMailer.notify_on_new_activity
   end
 
   handle_asynchronously :mail
