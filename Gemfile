@@ -12,6 +12,7 @@ gem 'clearance'
 gem 'kaminari'
 gem 'bourbon'
 gem 'neat'
+gem 'delayed_job_active_record'
 
 group :development do
   gem 'pry'

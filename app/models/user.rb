@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
     through: :follower_relationships
 
   def notify_followers(subject, target, type)
-    if subject.persisted? 
+    if subject.persisted?
       followers.each do |follower|
         follower.activities.create(
           subject: subject,
@@ -51,10 +51,19 @@ class User < ActiveRecord::Base
           actor: self,
           target: target
         )
-      #  UserMailer.notify_on_new_activity(follower, subject).deliver
-     end
+        mail(follower, subject)
+      end
+
     end
   end
+
+  handle_asynchronously :notify_followers
+
+  def mail(follower, subject)
+    UserMailer.delay.notify_on_new_activity(follower, subject)
+  end
+
+  handle_asynchronously :mail
 
   def follow(other_user)
     follow = followed_user_relationships.create(followed_user: other_user)
