@@ -7,32 +7,40 @@
 </div>
 <% if signed_in? %>
   <div id="image_vote_button">
-    <%= render "image_vote_button", image: @image %>
-  </div>
+  <%= render "image_vote_button", image: @image %>
+</div>
 <% end %>
 <div>
   <%= pluralize(@image.votes.count, "upvotes") %> <br>
-  uploaded by: <%= link_to @image.user.email, @image.user %> at <%= @image.created_at.strftime("%B %d, %Y") %> 
+  uploaded by: <%= link_to @image.user.email, @image.user %>
+on <%= @image.created_at.strftime("%B %d, %Y") %>
 </div>
 
+<div>
+  Tags:
+  <% @image.tag_list.each do |tag| %>
+    <%= link_to tag, tag_path(tag) %>
+<% end %>
+</div>
 <% if @image.user == current_user %>
   <div>
-    <%= link_to "Edit Image", edit_image_path(@image) %>, 
-    <%= link_to "Delete Image", @image, method: :delete, confirm: "Are you sure you want to delete this image?" %>
+  <%= link_to "Edit Image", edit_image_path(@image) %>,
+  <%= link_to "Delete Image", @image,
+  method: :delete, confirm: "Are you sure you want to delete this image?" %>
   </div>
 <% end %>
 
 <div>
   <% if signed_in? %>
     <%= form_for([@image, @comment], remote: true) do |form| %>
-      <%= form.text_area :body %>
-      <%= form.submit "Comment" %>
-    <% end %>
-  <% else %>
+    <%= form.text_area :body %>
+  <%= form.submit "Comment" %>
+<% end %>
+<% else %>
     <%= link_to "Sign in", sign_in_path %> to comment
-  <% end %>
+<% end %>
   <div id="comments">
     <%= render @comments %>
   </div>
-    <%= paginate @comments %>
+  <%= paginate @comments %>
 </div>

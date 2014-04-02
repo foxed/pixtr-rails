@@ -3,9 +3,13 @@
 <%= form_for(@image) do |form| %>
   <%= render 'form_errors', target: @image %>
 
-  <div><%= form.text_field :name %> Name </div>
-  <div><%= form.text_field :description %> Description</div>
-  <div><%= form.text_field :url %> URL</div>
-  <div><%= form.collection_check_boxes :group_ids, @groups, :id, :name %>
-  <%= form.submit "Update Image" %>
+  <div>Name: <%= form.text_field :name %> </div>
+  <div>Description: <%= form.text_field :description %> </div>
+  <div>URL:<%= form.text_field :url %></div>
+  <div>Tags: <%= form.text_field :tag_list %> </div>
+
+  <p>
+    <div><%= form.collection_check_boxes :group_ids, @groups, :id, :name %>
+    <%= form.submit "Update Image" %>
+  </p>
 <% end %>

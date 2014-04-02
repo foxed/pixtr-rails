@@ -13,6 +13,7 @@ gem 'kaminari'
 gem 'bourbon'
 gem 'neat'
 gem 'delayed_job_active_record'
+gem 'acts-as-taggable-on'
 
 group :development do
   gem 'pry'
