@@ -1,5 +1,10 @@
 class ImagesController < ApplicationController
 
+  def index
+    @images = Image.search(params[:search])
+  end
+
+
   def new
     @gallery = current_user.galleries.find(params[:gallery_id])
     @image = Image.new
@@ -43,7 +48,7 @@ class ImagesController < ApplicationController
     redirect_to image.gallery
   end
 
-  private
+  private 
 
   def image_params
     params.require(:image).permit(:name, :description, :url, :tag_list, group_ids:[])
