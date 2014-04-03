@@ -1,1 +1,10 @@
-<%= render @activities %>
+<div>
+  <% if current_user.premium? %>
+    You're a premium user!
+  <% else %>
+    <%= button_to "Upgrade your account!", new_charge_path, method: :get %>
+  <% end %>
+</div>
+<p>
+  <%= render @activities %>
+</p>

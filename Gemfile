@@ -14,6 +14,8 @@ gem 'bourbon'
 gem 'neat'
 gem 'delayed_job_active_record'
 gem 'acts-as-taggable-on'
+gem 'dotenv-rails'
+gem 'stripe'
 
 group :development do
   gem 'pry'

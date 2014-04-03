@@ -29,7 +29,7 @@ Pixtr::Application.routes.draw do
       delete "unfollow" => "following_relationships#destroy"
     end
   end
-      
+
   resources :images, except: [:index, :new, :create] do
     member do
       post "vote" => "image_votes#create"
@@ -45,4 +45,5 @@ Pixtr::Application.routes.draw do
     resources :comments, only: [:destroy]
     resources :tags, only:[:show]
 
+    resources :charges
 end

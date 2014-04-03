@@ -65,6 +65,9 @@ class User < ActiveRecord::Base
 
   handle_asynchronously :mail
 
+  def premium(user)
+    user
+  end
   def follow(other_user)
     follow = followed_user_relationships.create(followed_user: other_user)
     notify_followers(follow, other_user, 'FollowActivity')
@@ -104,4 +107,7 @@ class User < ActiveRecord::Base
     votes.exists?(votable: target)
   end
 
+  def premium?
+    stripe_id.length > 0
+  end
 end
