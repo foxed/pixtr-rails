@@ -35,9 +35,7 @@ Pixtr::Application.routes.draw do
       post "vote" => "image_votes#create"
       delete "unvote" => "image_votes#destroy"
     end
-    collection do
-      get :search, to: "images#index"
-    end
+ 
     resources :comments, only: [:create]
 
 
@@ -46,4 +44,5 @@ Pixtr::Application.routes.draw do
     resources :tags, only:[:show]
 
     resources :charges
+    resource :search, only: [:show]
 end

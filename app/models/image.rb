@@ -1,5 +1,7 @@
 class Image < ActiveRecord::Base
   acts_as_taggable
+  has_many :taggings
+  has_many :tags, through: :taggings
 
   belongs_to :gallery
   has_many :comments, dependent: :destroy
@@ -18,12 +20,5 @@ class Image < ActiveRecord::Base
     gallery.user
   end
 
-  def self.search(search)
-    if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-    else
-      puts "no results"
-    end
-  end
-
 end
+

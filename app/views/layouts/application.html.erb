@@ -13,9 +13,9 @@
     <nav>
       <%= link_to "My Galleries", galleries_path %>, 
       <%= link_to "My Groups", groups_path %>
-      <%= form_tag search_images_path, method: :get do %>
-        <%= text_field_tag :search, params[:search] %>
-        <%= submit_tag("Search") %>
+      <%= form_for(:search, url: search_path, method: :get) do |form| %>
+        <%= form.text_field :query, placeholder: "Search Here" %>
+        <%= form.submit "Search" %>
       <% end %>
     </nav>
    <div align ="right">

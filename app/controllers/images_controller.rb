@@ -1,8 +1,9 @@
 class ImagesController < ApplicationController
 
-  def index
-    @images = Image.search(params[:search])
-  end
+  respond_to :html
+  #def index
+   # @images = Image.search(params[:search])
+  #end
 
 
   def new
@@ -12,22 +13,19 @@ class ImagesController < ApplicationController
 
   def create
     @gallery = current_user.galleries.find(params[:gallery_id])
-    @image = @gallery.images.new(image_params)
-    if @image.save
-      redirect_to @gallery
-    else
-      render :new
-    end
+    @image = @gallery.images.create(image_params)
+
+    respond_with @image, location: @gallery
   end
 
-  def show 
+  def show
     @image = Image.find(params[:id])
     @comment = Comment.new
     @comments = @image.comments.includes(:actor, :user).
       recent.page(params[:page]).per(10)
   end
 
-  def edit 
+  def edit
     @image = current_user.images.find(params[:id])
     @groups = current_user.groups
   end
@@ -48,7 +46,7 @@ class ImagesController < ApplicationController
     redirect_to image.gallery
   end
 
-  private 
+  private
 
   def image_params
     params.require(:image).permit(:name, :description, :url, :tag_list, group_ids:[])
