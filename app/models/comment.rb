@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  paginates_per 2
+
   belongs_to :user
   belongs_to :actor, class_name: "User"
   belongs_to :image
@@ -10,5 +12,9 @@ class Comment < ActiveRecord::Base
 
   def self.recent
     order(created_at: :desc)
+  end
+
+  def self.paginate(page)
+    recent.page(page).includes(:user)
   end
 end

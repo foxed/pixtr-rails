@@ -1,10 +1,5 @@
 class ImagesController < ApplicationController
-
   respond_to :html
-  #def index
-   # @images = Image.search(params[:search])
-  #end
-
 
   def new
     @gallery = current_user.galleries.find(params[:gallery_id])
@@ -21,8 +16,7 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     @comment = Comment.new
-    @comments = @image.comments.includes(:actor, :user).
-      recent.page(params[:page]).per(10)
+    @comments = @image.comments.pagintaed(params[:page])
   end
 
   def edit

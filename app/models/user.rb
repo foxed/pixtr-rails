@@ -1,30 +1,19 @@
 class User < ActiveRecord::Base
   include Clearance::User
 
+  has_many :activities
+
   has_many :galleries, dependent: :destroy
   has_many :images, through: :galleries
 
-  has_many :votes, dependent: :destroy
+  has_many :votes, dependent: :destroy, inverse_of: :user
   has_many :voted_images,
     through: :votes,
     source: :votable,
     source_type: 'Image'
 
-  has_many :voted_galleries,
-    through: :votes,
-    source: :votable,
-    source_type: 'Gallery'
-
-  has_many :group_images,
-    through: :votes,
-    source: :votable,
-    source_type: 'Group'
-
   has_many :group_memberships, foreign_key: :member_id, dependent: :destroy
   has_many :groups, through: :group_memberships
-
-  has_many :activities
-
 
   has_many :followed_user_relationships,
     foreign_key: :follower_id,
@@ -42,32 +31,7 @@ class User < ActiveRecord::Base
   has_many :followers,
     through: :follower_relationships
 
-  def notify_followers(subject, target, type)
-    if subject.persisted?
-      followers.each do |follower|
-        follower.activities.create(
-          subject: subject,
-          type: type,
-          actor: self,
-          target: target
-        )
-        mail(follower, subject)
-      end
 
-    end
-  end
-
-  handle_asynchronously :notify_followers
-
-  def mail(follower, subject)
-    UserMailer.notify_on_new_activity
-  end
-
-  handle_asynchronously :mail
-
-  def premium(user)
-    user
-  end
   def follow(other_user)
     follow = followed_user_relationships.create(followed_user: other_user)
     notify_followers(follow, other_user, 'FollowActivity')
@@ -95,7 +59,7 @@ class User < ActiveRecord::Base
   end
 
   def vote(target)
-   vote = votes.create(votable: target)
+    vote = votes.create(votable: target)
     notify_followers(vote, target, 'VoteActivity')
   end
 

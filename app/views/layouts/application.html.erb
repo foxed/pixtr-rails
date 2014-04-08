@@ -9,9 +9,13 @@
 </head>
 <body>
   <h3><%= link_to "Pixtr", root_path %></h3>
+  # render "nav"
+  # render "user_bar"
+  # render "flash"
+  # render "search"
   <% if signed_in? %>
     <nav>
-      <%= link_to "My Galleries", galleries_path %>, 
+      <%= link_to "My Galleries", galleries_path %>,
       <%= link_to "My Groups", groups_path %>
       <%= form_for(:search, url: search_path, method: :get) do |form| %>
         <%= form.text_field :query, placeholder: "Search Here" %>
@@ -27,11 +31,11 @@
     <%= link_to 'Sign up', sign_up_path %>
   <% end %>
 
-    <div id="flash">
-      <% flash.each do |key, value| %>
-        <div class="flash <%= key %>"><%= value %></div>
-      <% end %>
-    </div>
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
 
   <%= yield %>
 
