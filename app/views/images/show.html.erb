@@ -34,13 +34,13 @@ on <%= @image.created_at.strftime("%B %d, %Y") %>
   <% if signed_in? %>
     <%= form_for([@image, @comment], remote: true) do |form| %>
     <%= form.text_area :body %>
-  <%= form.submit "Comment" %>
+    <%= form.submit "Comment" %>
 <% end %>
 <% else %>
     <%= link_to "Sign in", sign_in_path %> to comment
 <% end %>
-  <div id="comments">
-    <%= render @comments %>
-  </div>
+<div id="comments">
+  <%= render @comments %>
+</div>
   <%= paginate @comments %>
 </div>

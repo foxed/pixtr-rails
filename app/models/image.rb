@@ -1,7 +1,5 @@
 class Image < ActiveRecord::Base
   acts_as_taggable
-  has_many :taggings
-  has_many :tags, through: :taggings
 
   belongs_to :gallery
   has_many :comments, dependent: :destroy

@@ -1,7 +1,8 @@
 class GalleryVotesController < ApplicationController
   def create
     gallery = Gallery.find(params[:id])
-    current_user.vote gallery
+    vote = current_user.vote gallery
+    notify_followers(vote, gallery)
     redirect_to gallery
   end
   def destroy 

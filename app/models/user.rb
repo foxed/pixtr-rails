@@ -33,8 +33,7 @@ class User < ActiveRecord::Base
 
 
   def follow(other_user)
-    follow = followed_user_relationships.create(followed_user: other_user)
-    notify_followers(follow, other_user, 'FollowActivity')
+    followed_user_relationships.create(followed_user: other_user)
   end
 
   def unfollow(other_user)
@@ -46,8 +45,7 @@ class User < ActiveRecord::Base
   end
 
   def join(group)
-    group_membership = group_memberships.create(group: group)
-    notify_followers(group_membership, group, 'GroupMembershipActivity')
+    group_memberships.create(group: group)
   end
 
   def joined?(group)
@@ -59,8 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def vote(target)
-    vote = votes.create(votable: target)
-    notify_followers(vote, target, 'VoteActivity')
+    votes.create(votable: target)
   end
 
   def unvote(target)

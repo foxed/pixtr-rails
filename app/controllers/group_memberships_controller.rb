@@ -1,6 +1,8 @@
 class GroupMembershipsController < ApplicationController
   def create
     @group = Group.find(params[:id])
+    group_membership = current_user.join @group
+    notify_followers(group_membership, @group)
     current_user.join @group
     render :change
   end
@@ -10,4 +12,5 @@ class GroupMembershipsController < ApplicationController
     current_user.leave @group
     render :change
   end
+
 end

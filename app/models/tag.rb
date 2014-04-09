@@ -1,5 +1,4 @@
 class Tag < ActiveRecord::Base
-  has_many :taggings
   has_many :images, through: :taggings
 
   def self.self_from_tag_list(tag_string)

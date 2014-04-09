@@ -16,7 +16,8 @@ class ImagesController < ApplicationController
   def show
     @image = Image.find(params[:id])
     @comment = Comment.new
-    @comments = @image.comments.pagintaed(params[:page])
+    @comments = @image.comments.paginate(params[:page])
+    @tags = @image.tags
   end
 
   def edit

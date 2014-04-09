@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     image = Image.find(params[:image_id])
     comment = image.comments.new(comment_params)
     if comment.save
-      current_user.notify_followers(comment, image, 'CommentActivity')
+      notify_followers(comment, image)
       redirect_to image, notice: "Commented Successful!"
     else
       redirect_to image, alert: "Cannot comment with an empty comment."

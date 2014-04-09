@@ -1,20 +1,28 @@
 class FollowerNotifier
 
-  def notify_followers(subject, target, type)
+  def initialize(user)
+    @user = user
+  end
+
+  def notify_followers(subject, target)
     if subject.persisted?
-      followers.each do |follower|
+      user.followers.each do |follower|
         follower.activities.create(
           subject: subject,
-          type: type,
-          actor: self,
+          type: type(subject),
+          actor: user,
           target: target
         )
-        mail(follower, subject)
       end
-
     end
   end
 
   handle_asynchronously :notify_followers
 
+  private
+  attr_reader :user
+
+  def type(subject)
+    "#{subject.class}Activity"
+  end
 end
